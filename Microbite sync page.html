@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Micro:bit Dual Display (Date & Time)</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding-top: 50px;
+            background-color: #f4f4f9;
+        }
+        button {
+            font-size: 18px;
+            padding: 12px 24px;
+            cursor: pointer;
+            border: none;
+            border-radius: 6px;
+            background-color: #007acc;
+            color: white;
+        }
+        button:hover {
+            background-color: #005999;
+        }
+        #status {
+            margin-top: 20px;
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <h2>Micro:bit Wireless Sync</h2>
+    <p>Connect Micro:bit #1 (Date Display + Radio Transmitter)</p>
+    <button id="connectBtn">Connect USB Micro:bit</button>
+    <p id="status">Status: Disconnected</p>
+
+    <script>
+        let port;
+        let writer;
+
+        document.getElementById('connectBtn').addEventListener('click', async () => {
+            try {
+                // Request serial connection via WebUSB
+                port = await navigator.serial.requestPort();
+                await port.open({ baudRate: 115200 });
+                
+                document.getElementById('status').innerText = "Status: Connected & Broadcasting!";
+                
+                const textEncoder = new TextEncoderStream();
+                textEncoder.readable.pipeTo(port.writable);
+                writer = textEncoder.writable.getWriter();
+
+                // Send immediate payload on connection
+                sendDateTime();
+
+                // Send updated date & time every 10 seconds
+                setInterval(sendDateTime, 10000);
+
+            } catch (err) {
+                document.getElementById('status').innerText = "Error: " + err;
+            }
+        });
+
+        async function sendDateTime() {
+            if (!writer) return;
+
+            const now = new Date();
+
+            // Format Date as "OCT 29"
+            const dateStr = now.toLocaleDateString([], { month: 'short', day: 'numeric' }).toUpperCase();
+            
+            // Format Time as "13:06"
+            const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false });
+
+            // Combine using '|' delimiter (e.g., "OCT 29|13:06\n")
+            const payload = `${dateStr}|${timeStr}\n`;
+
+            await writer.write(payload);
+        }
+    </script>
+</body>
+</html>

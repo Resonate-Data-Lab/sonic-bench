@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sonic Donation</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+    <h1>Sonic Donation</h1>
+
+    <p id="status">Press Start to begin.</p>
+
+    <section id="start-panel">
+      <button id="start-btn">Start</button>
+    </section>
+
+    <section id="record-panel" hidden>
+      <button id="record-btn" class="record">Record</button>
+      <button id="stop-btn" class="stop" hidden>Stop</button>
+      <p id="record-timer" class="timer" hidden>0:00</p>
+    </section>
+
+    <section id="choice-panel" hidden>
+      <button id="donate-btn">Donate</button>
+      <button id="delete-btn" class="secondary">Delete</button>
+    </section>
+
+    <section id="thanks-panel" hidden>
+      <p class="thanks">Thank you.</p>
+    </section>
+  </main>
+
+  <!-- Testing only: skip between steps. -->
+  <nav id="step-nav" hidden>
+    <button id="prev-btn" aria-label="Previous step">&larr;</button>
+    <span id="step-label"></span>
+    <button id="next-btn" aria-label="Next step">&rarr;</button>
+  </nav>
+
+  <script src="sounds.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

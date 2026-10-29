@@ -1,0 +1,106 @@
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #111;
+  color: #eee;
+  font-family: -apple-system, "Helvetica Neue", Arial, sans-serif;
+  text-align: center;
+}
+
+main {
+  padding: 2rem;
+}
+
+h1 {
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  margin-bottom: 2rem;
+}
+
+#status {
+  min-height: 1.5em;
+  font-size: 1.2rem;
+  color: #aaa;
+  margin-bottom: 2rem;
+}
+
+button {
+  font-size: 1.3rem;
+  padding: 0.9rem 2.4rem;
+  margin: 0 0.5rem;
+  border: none;
+  border-radius: 999px;
+  background: #eee;
+  color: #111;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #fff;
+}
+
+button.secondary {
+  background: transparent;
+  color: #eee;
+  border: 1px solid #eee;
+}
+
+button.record {
+  background: #d33;
+  color: #fff;
+}
+
+button.stop {
+  background: #444;
+  color: #fff;
+}
+
+.timer {
+  margin-top: 1rem;
+  font-variant-numeric: tabular-nums;
+  color: #d33;
+}
+
+#step-nav {
+  position: fixed;
+  bottom: 1rem;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  font-size: 0.8rem;
+  color: #555;
+}
+
+#step-nav[hidden] {
+  display: none;
+}
+
+#step-nav button {
+  font-size: 1rem;
+  padding: 0.2rem 0.8rem;
+  margin: 0;
+  background: transparent;
+  color: #555;
+  border: 1px solid #333;
+}
+
+#step-nav button:hover:not(:disabled) {
+  color: #ccc;
+  border-color: #666;
+}
+
+#step-nav button:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.thanks {
+  font-size: 2rem;
+  font-weight: 300;
+}
